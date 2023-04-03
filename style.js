@@ -1,11 +1,28 @@
-const ArrayTareas = ["Hacer el TP 4", "Repasar los cocneptos que vimos en EFSI sobre Karl Marx", "Asistir a las clases de Stanca", "Leer lo que hicimos en la clase de agronomia cientifica cardiaca", "Copiarme en la prueba de matematica"];
+//var Agregar = document.getElementById("TODO").value;
+//var MisTareas = [];
+//MisTareas.push(document.getElementById("TODO").value);
+//
+//let lista = document.createElement("li");
+//document.getElementById ("TODO").appendChild(lista)
+//
+//let ingreso = document.createElement("checkbox");
+//document.getElementById (ingreso).appendChild(lista)
+//
+//
+//   // var input = document.createElement("input");
+//    //input.type = "checkbox";
+//
+//console.log(list);
 
-ArrayTareas.map((element) => {
-let contenido = document.createElement("li");
-contenido.innerHTML = element;
-document.getElementById ("ESCRIBIR").appendChild(contenido)
-});
 
+var MisTareas = [];
 
+function AgregarTareas() {
+    var TareasNueva = document.getElementById("INPUT").value; //Agarramos el valor del INPUT de la nueva tarea
+    MisTareas.push(TareasNueva); //Agregamos la tarea al array de tareas
+    var nuevaLista = document.createElement("checkbox"); // Creamos elemento de tipo lista
+    nuevaLista.textContent = TareasNueva; // El elemento nuevaLista adquiere el valor de la nueva tarea
+    document.getElementById("ListaTareas").appendChild(nuevaLista) //Se lo pasamos a la lista del INDEX
+    document.getElementById(nuevaLista).value = null; //Vaciamos el elemento de tipo lista para dar espacio al siguiente
 
-
+}
