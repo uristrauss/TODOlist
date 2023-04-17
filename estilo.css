@@ -1,0 +1,27 @@
+.tachado {
+    text-decoration: line-through;
+  }
+
+.imagen{
+    width: 50%;
+    height: 50%;
+  }
+
+  .TODO{
+    font-style: italic;
+  }
+
+html{
+    background-color: rgb(183, 223, 223);
+  }
+
+.centrar{
+  align-items: center;
+  text-align: center;
+}
+
+.boton{
+  background-color: rgb(183, 223, 223);
+  border-radius: 10px;
+  border-color: rgb(108, 168, 168);
+}
