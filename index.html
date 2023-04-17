@@ -4,30 +4,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
     <title>Document</title>
+    <!-- CSS de Bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+<!-- JS de jQuery -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+<!-- JS de Popper.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+<!-- JS de Bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 
 
 
-       
-          <label for="exampleInputEmail1" class="form-label">Escribi tu TO-DO:</label>
-          <input type="text" class="form-control" id="INPUT" aria-describedby="emailHelp">
-          <button id="agregarTODO()" onclick="AgregarTareas(event)"  class="btn btn-primary">Agregar TODO</button>
+  <div class="card mb-3">
+    <div class="centrar">
+      <img src="TODO.jpg" class="imagen" alt="...">
+    </div>
+      <div class="card-body">
+        <h3 class="card-title centrar"><b><i>¡Escribí las cosas que tenés que realizar!</i></b></h3>
+        <label for="exampleInputEmail1" class="form-label">.</label>
+            <input type="text" class="form-control" id="INPUT" aria-describedby="emailHelp">
+            <div id="ESCRIBIR"> </div>
+            <div class="centrar">
+              <br>
+              
+            <button id="agregarTODO()" onclick="AgregarTareas(event)" class="boton"><b>Agregar TODO</b></button>
+            <br>
+              <br>
+            <button onclick="MostrarTareaMasRapida()">Mostrar tarea más rápida</button>
+        <div id="TareaMasRapida"></div>
+      </div>
 
-          <checkbox id = "ListaTareas"></checkbox>
+      </div>
+  </div>
 
-          <div id="ESCRIBIR">
-
-        </div>
+          
     
 
   
     
-  
-
   
 
 <script src="style.js"></script>
+</div>
 </body>
 </html>
