@@ -1,61 +1,100 @@
-//var Agregar = document.getElementById("TODO").value;
-//var MisTareas = [];
-//MisTareas.push(document.getElementById("TODO").value);
-//
-//let lista = document.createElement("li");
-//document.getElementById ("TODO").appendChild(lista)
-//
-//let ingreso = document.createElement("checkbox");
-//document.getElementById (ingreso).appendChild(lista)
-//
-//
-//   // var input = document.createElement("input");
-//    //input.type = "checkbox";
-//
-//console.log(list);
-
-
 var MisTareas = [];
 
 function AgregarTareas(e) {
     e.preventDefault();
-    var TareaNueva = document.getElementById("INPUT").value; //Agarramos el valor del INPUT de la nueva tarea
-    if (document.getElementById("INPUT").value == "")
-    {
-        alert("Debe ingresar una tarea");
-    }
-    else
-    {
-        MisTareas.push(TareaNueva);
-        document.getElementById("ESCRIBIR").innerHTML = "";
-        MisTareas.map((x) => {
-            var Contenido = document.createElement("li");
-            var checkbox = document.createElement("input");
-            checkbox.type="checkbox";
-            Contenido.appendChild(checkbox)
-            checkbox.classList.add("checkbox")
-            Contenido,innerHTML += x;
-            document.getElementById("ESCRIBIR").appendChild(Contenido);
-            checkbox.onclick = function()
-            
-          });
-    }
+    let TareaNueva = document.getElementById("INPUT").value; //Agarramos el valor del INPUT de la nueva tarea
+                const Tarea = new Object(); //Creamos un array de objetos
+                Tarea.Texto = TareaNueva;
+                Tarea.Creacion = e.timeStamp;
+                Tarea.Fin = -1;
+                Tarea.Chequeado = false;
+        
+        //Crear un nuevo elemento de lista
+        const TODO = document.createElement("li");
+                TODO.className = "TODO"; //CONEXION CON CSS
 
+        //Crear un nuevo elemento de verificacion
+        let checkbox = document.createElement("input");
+                checkbox.type="checkbox"; // le decimos que el input sea de tipo checkbox
+                checkbox.className = "checkbox"; //CONEXION CON CSS
+                checkbox.setAttribute("onclick", "Tachar(event)") // no entendemos
 
-    //MisTareas.push(TareasNueva); //Agregamos la tarea al array de tareas
-    //MisTareas.map()
-    //var Padre = document.createElement("li");
-    //var nuevaLista = document.createElement("input"); // Creamos elemento de tipo lista
-    //nuevaLista.type="checkbox";
-   //// nuevaLista.textContent = TareasNueva; // El elemento nuevaLista adquiere el valor de la nueva tarea
-    //Padre.appendChild(nuevaLista);
-    //parrafo = document.createElement("p");
-    //parrafo.innertext = TareasNueva;
-    //Padre.appendChild(parrafo);
-    //document.getElementById("ListaTareas").appendChild(nuevaLista) //Se lo pasamos a la lista del INDEX
-    ////document.getElementById(nuevaLista).value == " "; //Vaciamos el elemento de tipo lista para dar espacio al siguiente
+        
+                
+        TODO.appendChild(checkbox)
+         texto= document.createElement("label")
+        texto.innerText= TareaNueva
+        TODO.appendChild(texto)              
+        document.getElementById("ESCRIBIR").appendChild(TODO);
+        MisTareas.push(Tarea);
+        //console.log("2")
+        
+    //}
 
 }
+
+function Tachar(e) {
+    let check = document.getElementsByClassName("checkbox");
+    //recorro el array de checks
+    for (let i = 0; i < check.length; i++) {
+       if(check[i].checked){
+           let ElementoPadre = check[i].parentNode; //agarramos el elemento padre
+           let texto = ElementoPadre.querySelector('label'); // buscamos el elemento de texto
+           if (texto) {
+               texto.classList.add("tachado"); // agregamos la clase de tachado
+               // agarro el texto del padre
+               let textoContent = texto.textContent;
+               //recorro el array de tareas
+               for (let j = 0; j < MisTareas.length; j++) {
+                   if (textoContent == MisTareas[j].Texto) {
+                       MisTareas[j].Fin = e.timeStamp;
+                       //digo que se completo
+                       MisTareas[j].Chequeado = true;
+                   }
+               }
+           }
+       } else {
+           let ElementoPadre = check[i].parentNode;
+           let texto = ElementoPadre.querySelector('label');
+           if (texto) {
+               texto.classList.remove("tachado"); //saco el tachado
+               let textoContent = texto.textContent;
+               //recorro el array
+               for (let j = 0; j < MisTareas.length; j++) {
+                   if (textoContent == MisTareas[j].Texto) {
+                       MisTareas[j].Fin = -1;
+                       //agrego el completado
+                       MisTareas[j].Chequeado = false;
+                   }
+               }
+           }
+       }
+    }
+ }
+ 
+
+    function MostrarTareaMasRapida() {
+        let tareaMasRapida;
+        let tiempoMasRapido = 9999999999999999999;
+        for (let i = 0; i < MisTareas.length; i++) {
+          if (MisTareas[i].Chequeado) {
+            var tiempoTarea = MisTareas[i].Fin - MisTareas[i].Creacion;//la antiguedad contra el momento en que paramos al tiempo
+            if (tiempoTarea < tiempoMasRapido) {
+              tiempoMasRapido = tiempoTarea; //toma el valor del mas rapiudo
+              tareaMasRapida = MisTareas[i].Texto; //toma el valor del mas rapido
+            }
+          }
+        }
+        const elementoTareaMasRapida = document.getElementById('TareaMasRapida');
+        if (tareaMasRapida != null) {
+            console.log(tareaMasRapida);
+            tiempoMasRapido = tiempoMasRapido/1000;//paso de milisegundos a segundos
+          elementoTareaMasRapida.innerText = `La tarea más rápida fue "${tareaMasRapida}" que se completó en ${tiempoMasRapido} segundos.`;
+        } else {
+          elementoTareaMasRapida.innerText = "No hay tareas completadas.";
+        }
+      }
+      
 
 
 
